@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import List, Optional
 
 # Temporary in-memory storage (will be replaced by DB)
 PRINTERS = []
@@ -19,3 +20,16 @@ def register_printer(name: str, location: str | None):
     PRINTER_ID_SEQ += 1
 
     return printer
+
+
+def list_printers() -> List[dict]:
+    """Return all registered printers."""
+    return PRINTERS
+
+
+def get_printer(printer_id: int) -> Optional[dict]:
+    """Get a printer by ID. Returns None if not found."""
+    for printer in PRINTERS:
+        if printer["id"] == printer_id:
+            return printer
+    return None
